@@ -23,7 +23,7 @@ class Index_controller extends Controller{
     
     public function arena(): void{
         if(!isset($_SESSION['user'])) {            
-            header('Location: http://localhost/TallerDP-Doc-Tests/');
+            header('Location:' . URL);
         }
         $this->view->render($this,"arena","Arena");
     }
