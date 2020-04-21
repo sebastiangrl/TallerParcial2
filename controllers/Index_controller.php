@@ -27,5 +27,12 @@ class Index_controller extends Controller{
         }
         $this->view->render($this,"arena","Arena");
     }
+    
+    public function characters(): void{
+        /*if(!isset($_SESSION['user'])) {            
+            header('Location:' . URL);
+        }*/
+        $this->view->render($this,"characters","Characters");
+    }
 
 }
