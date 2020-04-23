@@ -11,8 +11,11 @@
  *
  * @author pabhoz
  */
-abstract class Character implements ICharacter{
-    
+require_once LVENDORS . 'MySQLiManager/MySQLiManager.php';
+
+abstract class Character implements ICharacter {
+
+    protected $id;
     protected $name;
     protected $level;
     protected $str;
@@ -21,8 +24,9 @@ abstract class Character implements ICharacter{
     protected $mDef;
     protected $fDef;
     protected $hp;
+    static $db;
 
-    function __construct($name, $level, $str, $intl, $agi, $mDef, $fDef, $hp) {
+    function __construct($name, $level, $str, $intl, $agi, $mDef, $fDef, $hp, $id = null) {
         $this->name = $name;
         $this->level = $level;
         $this->str = $str;
@@ -31,9 +35,54 @@ abstract class Character implements ICharacter{
         $this->mDef = $mDef;
         $this->fDef = $fDef;
         $this->hp = $hp;
+        $this->id = $id;
     }
 
-    
+    private static function getConnection() {
+        self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
+    }
+
+    public static function getModel(int $id) {
+        self::getConnection();
+        $data = self::$db->select('*', "Character", "id = $id");
+        return $data[0];
+    }
+
+    public static function getClassName($id) {
+        self::getConnection();
+        $data = self::$db->select("name", "CharacterClass", "id = $id");
+        return $data[0]["name"];
+    }
+
+    public static function getClassNameId(string $className) {
+        self::getConnection();
+        $data = self::$db->select('id', "CharacterClass", "name = \"$className\"");
+        print_r($data);
+        return $data[0]["id"];
+    }
+
+    public function create() {
+        self::getConnection();
+        //print_r(get_object_vars($this));
+        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this))];
+        $data = self::$db->insert("Character", $values);
+    }
+
+    public function update() {
+        self::getConnection();
+        //print_r(get_object_vars($this));
+        $values = ["level" => $this->getLevel()];
+        $data = self::$db->update("Character", $values, "id = " . $this->getId());
+    }
+
+    public function delete() {
+        self::getConnection();
+        //print_r(get_object_vars($this));
+        //$values = ["id" => $this->getId()];
+        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)),"id" => $this->getId()];
+        $data = self::$db->delete("Character", $values);
+    }
+
     abstract public function attack(\ICharacter $target): void;
 
     abstract public function getDamage(float $value, bool $isMagical): void;
@@ -41,8 +90,8 @@ abstract class Character implements ICharacter{
     abstract public function getStat(string $statName): float;
 
     public function getStats(): array {
-        return ["level" => $this->getLevel(),"str" => $this->getStr(),"intl" => $this->getIntl(),"agi" => $this->getAgi()
-                ,"mDef" => $this->getMDef(),"fDef" => $this->getFDef(),"hp" => $this->getHp()];
+        return ["level" => $this->getLevel(), "str" => $this->getStr(), "intl" => $this->getIntl(), "agi" => $this->getAgi()
+            , "mDef" => $this->getMDef(), "fDef" => $this->getFDef(), "hp" => $this->getHp()];
     }
 
     abstract public function iDie(): void;
@@ -50,14 +99,14 @@ abstract class Character implements ICharacter{
     abstract public function setStat(string $statName, float $value): void;
 
     abstract public function setStats(array $stats): void;
-    
-    protected function isCritical(float $rate) :bool {
-        echo  $this->getName()."'s rate for a critical is ".($rate * 100)."% </br>";
-        $roll = mt_rand(0,100);
-        echo  $this->getName()."'s roll is: $roll </br>";
-        return ($roll <= $rate * 100) ? true: false;
+
+    protected function isCritical(float $rate): bool {
+        echo $this->getName() . "'s rate for a critical is " . ($rate * 100) . "% </br>";
+        $roll = mt_rand(0, 100);
+        echo $this->getName() . "'s roll is: $roll </br>";
+        return ($roll <= $rate * 100) ? true : false;
     }
-    
+
     function getName() {
         return $this->name;
     }
@@ -88,6 +137,14 @@ abstract class Character implements ICharacter{
 
     function getHp() {
         return $this->hp;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setId($id): void {
+        $this->id = $id;
     }
 
     function setName($name): void {

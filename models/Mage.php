@@ -15,7 +15,7 @@ class Mage extends Character {
 
     private $house;
 
-    function __construct($name, $house) {
+    function __construct($name, $house=null) {
         parent::__construct($name, 1, 4, 10, 6, 5, 2, 80);
         $this->house = $house;
     }

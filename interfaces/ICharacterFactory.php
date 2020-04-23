@@ -11,7 +11,9 @@
  * @author pabhoz
  */
 interface ICharacterFactory {
-    static function getMage(string $name): Mage;
-    static function getRogue(string $name): Rogue;
-    static function getWarrior(string $name): Warrior;
+    static function getCharacter(int $id): ICharacter;
+    static function newMage(string $name): Mage;
+    static function newRogue(string $name): Rogue;
+    static function newWarrior(string $name): Warrior;
+    static function createCharacter();
 }
