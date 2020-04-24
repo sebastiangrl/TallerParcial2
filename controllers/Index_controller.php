@@ -21,6 +21,10 @@ class Index_controller extends Controller{
         $this->view->render($this,"index","Woooooah MVC");
     }
     
+    public function login(): void {
+        $this->view->render($this,"login","Register");
+    }
+    
     public function arena(): void{
         if(!isset($_SESSION['user'])) {            
             header('Location:' . URL);

@@ -17,6 +17,8 @@
     define('CONTROLLERS',__DIR__.'/controllers/');
     define('VIEWS',__DIR__.'/views/');
 
+    define('BUSINESSLOGIC','./businessLogic/');
+    
     define('LVENDORS','./vendors/');
     
     define('VENDORS','./views/_vendors/');
