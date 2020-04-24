@@ -13,8 +13,10 @@
  */
 class CharacterFactory implements ICharacterFactory {
 
-    public static function getCharacter(int $id): \ICharacter {
-        $data = Character::getModel($id);
+    public static function getCharacter(int $id = null, $data = null): \ICharacter {
+        if(!is_null($id)){
+            $data = Character::getModel($id);
+        }
         $className = "new" . ucfirst(Character::getClassName($data["characterClassId"]));
         $character = CharacterFactory::{$className}($data["name"]);
         $character->setId($data["id"]);

@@ -3,7 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/jhonsebastiangonzalez/Desktop/Taller-Parcial-2020/controllers/Index_controller.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/View.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Mage.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/views/Index/arena.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/factories/CharacterFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/User.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/views/Index/index.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/IUser.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/businessLogic/BlUser.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/factories/ArenaFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/ICharacterFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/vendors/MySQLiManager/example.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Arena.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/loader.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/businessLogic/BlArena.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/index.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Character.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/controllers/Index_controller.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/ICharacter.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/views/Index/characters.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/factories/UserFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/config.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/IArenaFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Rogue.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/IArena.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/vendors/MySQLiManager/MySQLiManager.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Controller.php</file>
         </group>
     </open-files>
 </project-private>

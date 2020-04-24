@@ -1,53 +1,52 @@
 <?php $this->loadFragment("head"); ?>
-<body>
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <select class="form-control">
-    <option>Large select</option>
-    </select>
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th style="width: 100px;">Personaje</th>
-      <th style="width: 100px;">Nivel</th>
-      <th style="width: 100px;">Clase</th>
-      <th style="width: 100px;">Jugador</th>
-      <th style="width: 100px;">Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-      <?php $data = BlArena::searchFighters();
-      foreach ($data as $defenders): ?>
-    <tr>
-      <td><?php echo $defenders['name'] ?></td>
-      <td><?php echo $defenders['level'] ?></td>
-      <td>Mage</td>
-      <td>xXxPlayerDestroyerxXx</td>
-      <td>Desafiar</td>
-    </tr>
-    <?php endforeach;?>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<body>
+  <div class="centerDiv">
+    <form>
+        <div class="form-group">
+        <label for="exampleInputEmail1">Personaje</label>
+          <select class="form-control">
+            <option>Personajes</option>
+            <?php $data = BlArena::searchMyFighters();
+            foreach ($data as $challenger) : ?>
+              <option><?php echo $challenger['name'] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="centerDiv2">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th style="width: 100px;">Personaje</th>
+          <th style="width: 100px;">Nivel</th>
+          <th style="width: 100px;">Clase</th>
+          <th style="width: 100px;">Jugador</th>
+          <th style="width: 100px;">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $data = BlArena::searchFighters();
+        foreach ($data as $defenders) : 
+            $defenders = CharacterFactory::getCharacter(null,$defenders);?>
+          <form>
+            <tr>             
+                <td value="<?php echo $defenders->getId() ?>"><?php echo $defenders->getName() ?></td>
+                <td><?php echo $defenders->getLevel() ?></td>
+                <td><?php echo Character::getClassName($defenders->getId()) ?></td>
+                <td>xXxPlayerDestroyerxXx</td>
+                <td><button type="submit" class="btn btn-primary">Desafiar</button></td>             
+            </tr>
+          </form>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+
+
 
 </body>
+
 </html>
