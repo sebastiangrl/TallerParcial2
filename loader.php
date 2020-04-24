@@ -16,6 +16,11 @@ spl_autoload_register(function($class){
         require_once MODELS.$class.".php";
         return 0;
     }
-
+    
+    if(file_exists(BUSINESSLOGIC.$class.".php")){
+        require_once BUSINESSLOGIC.$class.".php";
+        return 0;
+    }
+    
 });
 

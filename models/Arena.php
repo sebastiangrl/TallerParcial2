@@ -17,12 +17,17 @@ class Arena implements IArena{
     private $challenger;
     private $defender;
     private $Winner;
+    static $db;
     
     public function __construct($challenger, $defender, $Winner, $id = null) {
         $this->challenger = $challenger;
         $this->defender = $defender;
         $this->Winner = $Winner;
         $this->id = $id;
+    }
+    
+    private static function getConnection() {
+        self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
 
     

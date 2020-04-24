@@ -16,4 +16,6 @@ interface IUser {
     
     public function getName():string;
     
+    public function setPassword():void;
+    
 }

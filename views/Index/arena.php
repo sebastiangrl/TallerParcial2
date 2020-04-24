@@ -29,13 +29,16 @@
     </tr>
   </thead>
   <tbody>
+      <?php $data = BlArena::searchFighters();
+      foreach ($data as $defenders): ?>
     <tr>
-      <td>Foo</td>
-      <td>4	</td>
+      <td><?php echo $defenders['name'] ?></td>
+      <td><?php echo $defenders['level'] ?></td>
       <td>Mage</td>
       <td>xXxPlayerDestroyerxXx</td>
       <td>Desafiar</td>
     </tr>
+    <?php endforeach;?>
     <tr>
       <td></td>
       <td></td>

@@ -18,7 +18,7 @@ abstract class Controller implements IController{
     function __construct() {
         $this->view = new View();
         session_start();
-        $_SESSION['user']=true;
+        $_SESSION['user']= UserFactory::searchUser("pelos", "pelos");
     }
 
     abstract public function index(): void;

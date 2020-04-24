@@ -12,18 +12,16 @@
  * @author PELITOS
  */
 class BlArena {
-    static function searchFighters(Character $challenger): array {
-        $level = $challenger->getLevel();
-        //$Fighters = (select * from [personajes] where level between $level-2 and $level+2)  
-        return $Fighters;
+    static $db;
+    
+    private static function getConnection() {
+        self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
     
-    static function setArenaBda($param): void {
-        
-    }
-    
-    static function getArenaBda($user): array {
-        
-        return $arena;
+    static function searchFighters(Character $challenger = null) {
+        self::getConnection();
+        //$level = $challenger->getLevel();
+        $data = self::$db->select("*", "character", "level between 1-2 and 1+2 and not id in (select Characterid from user_has_character where userid = 1)");
+        return $data;
     }
 }

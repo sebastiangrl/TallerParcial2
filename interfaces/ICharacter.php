@@ -11,18 +11,30 @@
  * @author pabhoz
  */
 interface ICharacter {
+
+    function getStats(): array;
+
+    function setStats(array $stats): void;
+
+    function getStat(string $statName): float;
+
+    function setStat(string $statName, float $value): void;
+
+    function attack(ICharacter $target): void;
+
+    function getDamage(float $value, bool $isMagical): void;
+
+    function iDie(): void;
+
+    static function getModel(int $id);
+
+    static function getClassName(int $id);
     
-    function getStats() :array;
-    
-    function setStats(array $stats) :void;
-    
-    function getStat(string $statName) :float;
-    
-    function setStat(string $statName, float $value) :void;
-    
-    function attack(ICharacter $target) :void;
-    
-    function getDamage(float $value, bool $isMagical) :void;
-    
-    function iDie() :void;
+    static function getClassNameId(string $className);
+
+    function create();
+
+    function update();
+
+    function delete();
 }
