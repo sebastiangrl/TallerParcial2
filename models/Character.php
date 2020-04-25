@@ -48,10 +48,11 @@ abstract class Character implements ICharacter {
         $data = self::$db->insert("user_has_character", $values);
     }
 
-    public static function getModel(int $id) {
+    public static function getModel(int $id = null) {
         self::getConnection();
-        $data = self::$db->select('*', "Character", "id = $id");
-        return $data[0];
+        $idUser = $_SESSION['user']->getId();
+        $data = self::$db->select('*', "Character", "id in (select Characterid from user_has_character where userid = $idUser)");
+        return $data;
     }
 
     public static function getClassName($id) {

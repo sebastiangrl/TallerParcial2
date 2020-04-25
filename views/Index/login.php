@@ -19,9 +19,9 @@
         if (isset($_POST['submit'])) {
 
             $value = \UserFactory::searchUser($_POST['user'], $_POST['password']);
-
+            
             if ($value == true) {?>
-                   document.location.assign('characters');<?php
+                  document.location.assign('characters'); <?php
             }
         }
     ?>

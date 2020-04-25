@@ -15,7 +15,7 @@ class User implements IUser {
     private $id;
     static $db;
 
-    public function __construct($name, $id) {
+    public function __construct($name, $pass, $id = null) {
         $this->name = $name;
         $this->pass = $pass;
         $this->id = $id;
@@ -34,8 +34,9 @@ class User implements IUser {
     public static function validUser($username, $password) {
         self::getConnection();
         $values = ["username" => $username, "password" => $password];
-        //$values =  "username = $username and password = $password";
-        $response = self::$db->check('*', "User", $values);
+        //$values = "username = $username and password = $password";
+        $response = self::$db->check('*',"User",$values, false);
+        //print_r($response);
         return $response;
     }
 
@@ -53,12 +54,12 @@ class User implements IUser {
         return $this->pass;
     }
 
-    function setPass($pass): void {
-        $this->pass = $pass;
+    function setPass() {
+        self::getConnection();
     }
 
     public function getId() {
-        return $this->id;
+        return $this->name;
     }
 
 }

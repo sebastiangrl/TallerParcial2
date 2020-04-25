@@ -13,8 +13,10 @@
  */
 class CharacterFactory implements ICharacterFactory {
 
-    public static function getCharacter(int $id): \ICharacter {
-        $data = Character::getModel($id);
+    public static function getCharacter(int $id = null, $data = null): \ICharacter {
+        if (!is_null($id)) {
+            $data = Character::getModel($id);
+        }
         $className = "new" . ucfirst(Character::getClassName($data["characterClassId"]));
         $character = CharacterFactory::{$className}($data["name"]);
         $character->setId($data["id"]);
@@ -35,18 +37,18 @@ class CharacterFactory implements ICharacterFactory {
         return new Warrior($name);
     }
 
-    
     public static function createCharacter() {
 
         if (isset($_POST['name']) && isset($_POST['selectClass'])) {
             $name = $_POST['name'];
             $selectClass = $_POST['selectClass'];
-            
+
             $className = "new" . ucfirst($selectClass);
             $character = CharacterFactory::{$className}($name);
-            $character->create();   
+            $character->create();
             $character->setID(Character::getCharacterId($character->getName()));
             $character->setUser();
         }
     }
+
 }

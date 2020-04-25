@@ -1,12 +1,10 @@
 <?php
 if (isset($_POST['submit'])) {
-   \CharacterFactory::createCharacter();
+    \CharacterFactory::createCharacter();
 }
 
 //$character = CharacterFactory::getCharacter(2);
 //$character->delete();
-
-
 ?>
 
 
@@ -39,13 +37,20 @@ if (isset($_POST['submit'])) {
         </thead>
 
         <tbody>
-            <?php ///CharacterFactory::getCharacter($id); while ($row = mysqli_fetch_array($))?>
-            <tr>
-                <td><?php echo $_POST['name'];?></td>
-                <td><?php echo $_POST['selectClass'];?></td>
-            </tr>
-        </tbody>
-    </table>
+            <?php
+            $data = Character::getModel();
+            foreach ($data as $character) : ?>
+            <form>
+                <tr>             
+                    <td value="<?php //echo $character->getId() ?>">
+                    <td><?php echo $characters->getName() ?></td>
+                    <td><?php //echo Character::getClassName($character->getId()) ?></td>
+                    <td><?php //echo $character->getLevel() ?></td>      
+                </tr>
+            </form>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 
 
 </body>

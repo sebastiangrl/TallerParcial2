@@ -13,7 +13,7 @@ class UserFactory implements IUserFactory {
         if (isset($_POST['user']) && isset($_POST['password'])) {
             $userName = $_POST['user'];
             $pass = $_POST['password'];
-            $user = UserFactory::getUser($userName, $pass);
+            $user = UserFactory::newUser($userName, $pass);
             $user->create();
         }
     }
@@ -25,7 +25,7 @@ class UserFactory implements IUserFactory {
     }
 
     public static function newUser(string $username, string $password): \User {
-        return new User($username, $password);
+        return new User($username, $password, null);
     }
 
     public static function getUserInFactory(int $id): \IUser {
