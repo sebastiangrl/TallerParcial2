@@ -38,17 +38,19 @@ if (isset($_POST['submit'])) {
 
         <tbody>
             <?php
-            $data = Character::getModel();
-            foreach ($data as $character) : ?>
+            $data = BlArena::searchMyFighters();
+            foreach ($data as $character) :
+                $character = CharacterFactory::getCharacter(null, $character);
+                ?>
             <form>
                 <tr>             
-                    <td value="<?php //echo $character->getId() ?>">
-                    <td><?php echo $characters->getName() ?></td>
-                    <td><?php //echo Character::getClassName($character->getId()) ?></td>
-                    <td><?php //echo $character->getLevel() ?></td>      
+                    <td value="<?php echo $character->getId()  ?>">
+                    <td><?php echo $character->getName() ?></td>
+                    <td><?php echo Character::getClassName($character->getId())  ?></td>
+                    <td><?php echo $character->getLevel()  ?></td>      
                 </tr>
             </form>
-        <?php endforeach; ?>
+<?php endforeach; ?>
     </tbody>
 </table>
 

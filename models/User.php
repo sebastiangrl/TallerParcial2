@@ -35,7 +35,7 @@ class User implements IUser {
         self::getConnection();
         $values = ["username" => $username, "password" => $password];
         //$values = "username = $username and password = $password";
-        $response = self::$db->check('*',"User",$values, false);
+        $response = self::$db->check('*', "User", $values, false);
         //print_r($response);
         return $response;
     }
@@ -58,7 +58,7 @@ class User implements IUser {
         self::getConnection();
     }
 
-    public function getId() {
+    public function getId(): int {
         return $this->name;
     }
 

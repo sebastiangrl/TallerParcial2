@@ -42,3 +42,16 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.centerDiv{
+  margin: auto 15px auto auto;
+  padding-right: 15px;
+}
+.centerDiv2{
+  margin: auto auto auto 15px;
+}
+.batalla{
+  width: 500px;
+  min-height: 50px;
+  max-height: 300px;
+  overflow: auto;
+}

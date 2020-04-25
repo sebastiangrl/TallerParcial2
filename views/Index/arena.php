@@ -8,8 +8,9 @@
           <select class="form-control">
             <option>Personajes</option>
             <?php $data = BlArena::searchMyFighters();
-            foreach ($data as $challenger) : ?>
-              <option><?php echo $challenger['name'] ?></option>
+            foreach ($data as $challenger) : 
+                $challenger = CharacterFactory::getCharacter(null,$challenger);?>
+              <option><?php echo $challenger->getName() ?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -44,9 +45,20 @@
       </tbody>
     </table>
   </div>
-
-
-
+      <?php // para que funcione se deben recuperar los datos y agregarlos en la funcion de abajo createArena se debe ingresar un objeto  
+            //  CharacterFactory::getCharacter($id) pide un id y te regresa el objeto que se debe agregar en ArenaFactory::createArena()
+        $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(2)->getId(), CharacterFactory::getCharacter(3)->getId());
+        $datos->setWinner($datos->fight(CharacterFactory::getCharacter(1), CharacterFactory::getCharacter(2)));
+        $datos->update($datos->getWinner())
+                ?>
+      <label for="exampleInputEmail1">Batalla</label>
+      <div class="batalla">
+      <?php foreach ($datos->getModeloHistoria() as $value) {
+        echo $value['Action'];
+      }
+       ?>
+    </div>
+  </div>
 </body>
 
 </html>

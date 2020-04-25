@@ -6,7 +6,7 @@
  */
 interface IUser {
     
-    //public function setPass(): void;
+    public function getId(): int;
     
     static function getUser(int $id);
 

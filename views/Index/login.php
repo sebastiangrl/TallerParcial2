@@ -20,7 +20,9 @@
 
             $value = \UserFactory::searchUser($_POST['user'], $_POST['password']);
             
-            if ($value == true) {?>
+            if ($value == true) {
+                //session_start();
+                ?>
                   document.location.assign('characters'); <?php
             }
         }

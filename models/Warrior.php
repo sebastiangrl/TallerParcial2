@@ -17,26 +17,23 @@ class Warrior extends Character{
         parent::__construct($name, 1, 10, 4, 6, 2, 6, 110);
     }
 
-    public function attack(\ICharacter $target): void {
-
+    public function attack(\ICharacter $target): string {
         $damage = (!$this->isCritical((0.6 * $this->getStr()) / 100)) ? 1.4 * $this->getStr() : (1.4 * $this->getStr()) * 2;
-
-        echo $this->getName() . " burns " . $target->getName() . " for " . $damage . " hp! </br>";
-        $target->getDamage($damage, false);
+        return $this->getName() . " burns " . $target->getName() . " for " . $damage . " hp! </br>".$target->getDamage($damage, false);
     }
 
-    public function getDamage(float $value, bool $isMagical): void {
+    public function getDamage(float $value, bool $isMagical): string {
         $takenDamage = ($isMagical) ? $value - $this->getMDef() : $value - (0.8 * $this->getFDef());
         $this->setHp($this->getHp() - $takenDamage);
-        echo $this->getName() . " now has " . $this->getHp() . " hp </br>";
+        return $this->getName() . " now has " . $this->getHp() . " hp </br>";
     }
 
     public function getStat(string $statName): float {
         
     }
 
-    public function iDie(): void {
-        
+    public function iDie(): bool {
+        return ($this->getHp() <= 0)?true:false;
     }
 
     public function setStat(string $statName, float $value): void {

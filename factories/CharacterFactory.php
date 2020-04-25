@@ -14,14 +14,16 @@
 class CharacterFactory implements ICharacterFactory {
 
     public static function getCharacter(int $id = null, $data = null): \ICharacter {
-        if (!is_null($id)) {
+
+        if(!is_null($id)){
             $data = Character::getModel($id);
         }
         $className = "new" . ucfirst(Character::getClassName($data["characterClassId"]));
         $character = CharacterFactory::{$className}($data["name"]);
+        //print_r($character);
         $character->setId($data["id"]);
-        $character->setLevel($data["level"]);
-
+        if($data["level"] > 1){$character->setLevel($data["level"]);}
+        //print_r($character);
         return $character;
     }
 
@@ -46,7 +48,7 @@ class CharacterFactory implements ICharacterFactory {
             $className = "new" . ucfirst($selectClass);
             $character = CharacterFactory::{$className}($name);
             $character->create();
-            $character->setID(Character::getCharacterId($character->getName()));
+            $character->setId(Character::getCharacterId($character->getName()));
             $character->setUser();
         }
     }

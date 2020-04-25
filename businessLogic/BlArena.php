@@ -11,6 +11,7 @@
  *
  * @author PELITOS
  */
+require_once LVENDORS . 'MySQLiManager/MySQLiManager.php';
 class BlArena {
 
     static $db;
@@ -25,11 +26,11 @@ class BlArena {
         $data = self::$db->select("*", "character", "level between 1-2 and 1+2 and not id in (select Characterid from user_has_character where userid = $id)");
         return $data;
     }
-
+    
     static function searchMyFighters(Character $challenger = null) {
         self::getConnection();
-        $id = $_SESSION['user']->getId();
-        $data = self::$db->select("*", "character", "id in (select Characterid from user_has_character where userid = $id)");
+        $id = $_SESSION['user'];
+        $data = self::$db->select("*", "Character", "visible = 1 and id in (select Characterid from User_has_Character where userid = $id)");
         return $data;
     }
 
