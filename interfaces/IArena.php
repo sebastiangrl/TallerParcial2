@@ -13,17 +13,23 @@
 interface IArena {
     
     function getId():int;
+    
+    function setId(int $id):void;
 
-    function getChallenger(): Character;
+    function getChallenger(): int;
     
-    function setChallenger(): void;
+    function setChallenger($challenger): void;
     
-    function getDefender(): Character;
+    function getDefender(): int;
     
-    function setDefender(): void;
+    function setDefender($defender): void;
     
-    function getWinner (): Character;
+    function getWinner (): int;
     
-    function setWinner (): void;
+    function setWinner ($winner): void;
+    
+    function setHistoria (array $historia):void;
+    
+    function getHistoria ():array;
     
 }

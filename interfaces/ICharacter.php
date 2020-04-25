@@ -20,11 +20,11 @@ interface ICharacter {
 
     function setStat(string $statName, float $value): void;
 
-    function attack(ICharacter $target): void;
+    function attack(ICharacter $target): string;
 
-    function getDamage(float $value, bool $isMagical): void;
+    function getDamage(float $value, bool $isMagical): string;
 
-    function iDie(): void;
+    function iDie(): bool;
 
     static function getModel(int $id);
 

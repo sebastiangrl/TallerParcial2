@@ -50,7 +50,7 @@ abstract class Character implements ICharacter {
 
     public static function getModel(int $id) {
         self::getConnection();
-        $data = self::$db->select('*', "Character", "id = $id");
+        $data = self::$db->select('*', "Character", "visible = 1 and id = $id");
         return $data[0];
     }
 
@@ -69,14 +69,13 @@ abstract class Character implements ICharacter {
     public static function getClassNameId(string $className) {
         self::getConnection();
         $data = self::$db->select('id', "CharacterClass", "name = \"$className\"");
-        print_r($data);
         return $data[0]["id"];
     }
 
     public function create() {
         self::getConnection();
         //print_r(get_object_vars($this));
-        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this))];
+        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)),"visible" => 1];
         $data = self::$db->insert("Character", $values);
     }
 
@@ -95,9 +94,9 @@ abstract class Character implements ICharacter {
         $data = self::$db->delete("Character", $values);
     }
 
-    abstract public function attack(\ICharacter $target): void;
+    abstract public function attack(\ICharacter $target): string;
 
-    abstract public function getDamage(float $value, bool $isMagical): void;
+    abstract public function getDamage(float $value, bool $isMagical): string;
 
     abstract public function getStat(string $statName): float;
 
@@ -106,16 +105,14 @@ abstract class Character implements ICharacter {
             , "mDef" => $this->getMDef(), "fDef" => $this->getFDef(), "hp" => $this->getHp()];
     }
 
-    abstract public function iDie(): void;
+    abstract public function iDie(): bool;
 
     abstract public function setStat(string $statName, float $value): void;
 
     abstract public function setStats(array $stats): void;
 
     protected function isCritical(float $rate): bool {
-        echo $this->getName() . "'s rate for a critical is " . ($rate * 100) . "% </br>";
         $roll = mt_rand(0, 100);
-        echo $this->getName() . "'s roll is: $roll </br>";
         return ($roll <= $rate * 100) ? true : false;
     }
 

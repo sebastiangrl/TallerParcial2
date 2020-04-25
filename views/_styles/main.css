@@ -49,3 +49,9 @@ body {
 .centerDiv2{
   margin: auto auto auto 15px;
 }
+.batalla{
+  width: 500px;
+  min-height: 50px;
+  max-height: 300px;
+  overflow: auto;
+}

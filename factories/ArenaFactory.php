@@ -12,5 +12,15 @@
  * @author PELITOS
  */
 class ArenaFactory {
-    //put your code here
+    
+    public static function createArena($idChallenger, $idDefender) {
+        $arena = ArenaFactory::newArena($idChallenger, $idDefender);
+        $arena->createArena($idChallenger, $idDefender);
+        $arena->setId($arena->getArenaId($idChallenger, $idDefender));
+        return $arena;
+    }
+    
+    public static function newArena($idChallenger, $idDefender) {
+        return new Arena($idChallenger, $idDefender);
+    }
 }
