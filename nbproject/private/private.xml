@@ -16,6 +16,7 @@
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/vendors/MySQLiManager/example.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Arena.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/loader.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Warrior.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/businessLogic/BlArena.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/index.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Character.php</file>
@@ -23,6 +24,7 @@
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/ICharacter.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/views/Index/characters.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/factories/UserFactory.php</file>
+            <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/mvcBootstrap.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/config.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/interfaces/IArenaFactory.php</file>
             <file>file:/D:/Programas/xampp/htdocs/Backend/parcial2/TallerParcial2/models/Rogue.php</file>
