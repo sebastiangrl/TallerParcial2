@@ -44,7 +44,9 @@
         <?php endforeach; ?>
       </tbody>
     </table>
-      <?php   $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(2)->getId(), CharacterFactory::getCharacter(3)->getId());
+      <?php // para que funcione se deben recuperar los datos y agregarlos en la funcion de abajo createArena se debe ingresar un objeto  
+            //  CharacterFactory::getCharacter($id) pide un id y te regresa el objeto que se debe agregar en ArenaFactory::createArena()
+        $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(2)->getId(), CharacterFactory::getCharacter(3)->getId());
         $datos->setWinner($datos->fight(CharacterFactory::getCharacter(1), CharacterFactory::getCharacter(2)));
         $datos->update($datos->getWinner())
                 ?>
