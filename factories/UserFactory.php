@@ -6,13 +6,18 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of UserFactory
- *
- * @author PELITOS
- */
-class UserFactory implements IUserFactory{
-    
+class UserFactory implements IUserFactory {
+
+    public static function createUser() {
+
+        if (isset($_POST['user']) && isset($_POST['password'])) {
+            $userName = $_POST['user'];
+            $pass = $_POST['password'];
+            $user = UserFactory::newUser($userName, $pass);
+            $user->create();
+        }
+    }
+
     public static function searchUser(string $username, string $password): \IUser {
         $data = User::getModel($username, $password);
         $user = UserFactory::getUser($data[0]);
@@ -21,6 +26,15 @@ class UserFactory implements IUserFactory{
 
     public static function getUser($objeto): \User {
         return new User($objeto['id'], $objeto['username']);
+    }
+
+    public static function newUser(string $username, string $password): \User {
+        return new User($username, $password, null);
+    }
+
+    public static function getUserInFactory(int $id): \IUser {
+        $user = User::getUser($id);
+        return $user;
     }
 
 }

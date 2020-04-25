@@ -29,10 +29,6 @@ class Arena implements IArena{
     private static function getConnection() {
         self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
-    
-    static function preparing($param) {
-        
-    }
 
     public function fight(\ICharacter $challenger, \ICharacter $defenders): int {
             $this->createAction("~ ".$defenders->attack($challenger));

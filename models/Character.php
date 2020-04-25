@@ -42,6 +42,14 @@ abstract class Character implements ICharacter {
         self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
     
+    public function getUserName() {
+        self::getConnection();
+        $param = $this->id;
+        $data = self::$db->select('username', "user", "id = (SELECT Userid from user_has_character where Characterid = $param )");
+        return $data[0]['username'];
+        
+    }
+    
     public function setUser(){
         self::getConnection();
         $values = ["Userid" => $_SESSION['user']->getID(), "Characterid" => $this->getId()];
