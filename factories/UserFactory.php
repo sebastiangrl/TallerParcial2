@@ -8,20 +8,29 @@
 
 class UserFactory implements IUserFactory {
 
-    public static function newUser($objeto): \User {
-        return new User($objeto['id'], $objeto['name']);
-    }
-
     public static function createUser() {
 
-        if (isset($_POST['email']) && isset($_POST['pass'])) {
-            $email = $_POST['email'];
+        if (isset($_POST['user']) && isset($_POST['password'])) {
+            $userName = $_POST['user'];
             $pass = $_POST['password'];
-            
-            $objeto = ['email'=>$email, 'password'=>$pass];
-            $user = self::newUser($objeto);
+            $user = UserFactory::getUser($userName, $pass);
             $user->create();
         }
+    }
+
+    public static function searchUser(string $username, string $password) {
+        $data = User::validUser($username, $password);
+       //$user = UserFactory::getUser($data[0]);
+        return $data;
+    }
+
+    public static function newUser(string $username, string $password): \User {
+        return new User($username, $password);
+    }
+
+    public static function getUserInFactory(int $id): \IUser {
+        $user = User::getUser($id);
+        return $user;
     }
 
 }

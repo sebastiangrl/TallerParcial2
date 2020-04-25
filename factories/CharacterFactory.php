@@ -44,7 +44,9 @@ class CharacterFactory implements ICharacterFactory {
             
             $className = "new" . ucfirst($selectClass);
             $character = CharacterFactory::{$className}($name);
-            $character->create();
+            $character->create();   
+            $character->setID(Character::getCharacterId($character->getName()));
+            $character->setUser();
         }
     }
 }

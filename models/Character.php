@@ -41,6 +41,12 @@ abstract class Character implements ICharacter {
     private static function getConnection() {
         self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
+    
+    public function setUser(){
+        self::getConnection();
+        $values = ["Userid" => $_SESSION['user']->getID(), "Characterid" => $this->getId()];
+        $data = self::$db->insert("user_has_character", $values);
+    }
 
     public static function getModel(int $id) {
         self::getConnection();
@@ -54,6 +60,12 @@ abstract class Character implements ICharacter {
         return $data[0]["name"];
     }
 
+    public static function getCharacterId($Name) {
+        self::getConnection();
+        $data = self::$db->select('id', "Character", "name = \"$Name\"");
+        return $data[0]["id"];
+    }
+    
     public static function getClassNameId(string $className) {
         self::getConnection();
         $data = self::$db->select('id', "CharacterClass", "name = \"$className\"");

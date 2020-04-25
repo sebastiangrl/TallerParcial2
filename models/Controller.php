@@ -11,16 +11,15 @@
  *
  * @author pabhoz
  */
-abstract class Controller implements IController{
-    
+abstract class Controller implements IController {
+
     protected $view;
-    
+
     function __construct() {
         $this->view = new View();
         session_start();
-        $_SESSION['user']=true;
+        $_SESSION['user'] = true;//UserFactory::searchUser("admin", "admin");
     }
 
     abstract public function index(): void;
-
 }

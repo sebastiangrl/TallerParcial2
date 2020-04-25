@@ -1,7 +1,5 @@
 <?php
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $selectClass = $_POST['selectClass'];
    \CharacterFactory::createCharacter();
 }
 
@@ -14,7 +12,7 @@ if (isset($_POST['submit'])) {
 
 <?php $this->loadFragment("head"); ?>
 <body class="text-center">
-    <form class="form-signin" <?php //echo htmlspecialchars($_SERVER['PHP_SELF'])     ?>" method="POST">
+    <form class="form-signin" method="POST">
         <h1>Characters</h1>
 
         <fieldset>
