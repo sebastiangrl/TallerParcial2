@@ -58,7 +58,7 @@ abstract class Character implements ICharacter {
 
     public static function getModel(int $id) {
         self::getConnection();
-        $data = self::$db->select('*', "Character", "visible = 1 and id = $id");
+        $data = self::$db->select('*', "Character", "id = $id");
         return $data[0];
     }
 
@@ -83,7 +83,7 @@ abstract class Character implements ICharacter {
     public function create() {
         self::getConnection();
         //print_r(get_object_vars($this));
-        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)),"visible" => 1];
+        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this))];
         $data = self::$db->insert("Character", $values);
     }
 

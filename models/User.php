@@ -36,6 +36,11 @@ class User implements IUser{
         self::getConnection();   
         return self::$db->select('*', "User", "username = \"$username\" and password = \"$password\"");
     }
+    public static function deleteUserChar($param) {
+        self::getConnection();
+        $values = ["Characterid" => $param];
+        $data = self::$db->delete("user_has_character", "Characterid = $param",true);
+    }
 
     public function getId(): int {
         return $this->name;

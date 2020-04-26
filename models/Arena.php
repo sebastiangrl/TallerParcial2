@@ -16,7 +16,6 @@ class Arena implements IArena{
     private $id;
     private $challenger;
     private $defender;
-    private $winner;
     private $historia;
     static $db;
     
@@ -30,25 +29,16 @@ class Arena implements IArena{
         self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
     }
 
-    public function fight(\ICharacter $challenger, \ICharacter $defenders): int {
+    public function fight(\ICharacter $challenger, \ICharacter $defenders): \ICharacter {
             $this->createAction("~ ".$defenders->attack($challenger));
             if($challenger->iDie()){
-                $this->loser($challenger->getId());
-                return $defenders->getId();
+                return $challenger;
             }
             $this->createAction("~ ".$challenger->attack($defenders));
             if($defenders->iDie()){
-                $this->loser($defenders->getId());
-                return $challenger->getId();
+                return $challenger;
             }
         return self::fight($challenger, $defenders);
-    }
-    
-    public function update() {
-        self::getConnection();
-        //print_r(get_object_vars($this));
-        $values = ["Winner" => $this->getWinner()];
-        $data = self::$db->update("Arena", $values, "id = " . $this->getId());
     }
     
     public function createAction($action) {
@@ -60,11 +50,11 @@ class Arena implements IArena{
     
     public function createArena($challenger, $defender) {
         self::getConnection();
-        $values = ["Ccharacterid" => $challenger, "Dcharacterid" => $defender];
+        $values = ["retador" => $challenger, "defensor" => $defender, "User_id" => $_SESSION['user']->getId()];
         $data = self::$db->insert("Arena", $values);
     }
     
-    public function getModel($action) {
+    public function getModel() {
         self::getConnection();
         $id = $_SESSION['user']->getId();
         $data = self::$db->select('*', "Arena", "(Ccharacterid or Dcharacterid) in (select Characterid from user_has_character where userid = $id)");
@@ -73,7 +63,7 @@ class Arena implements IArena{
     
     public function getArenaId($challenger, $defender) {
         self::getConnection();
-        $data = self::$db->select('id', "Arena", "Ccharacterid = $challenger and Dcharacterid = $defender");
+        $data = self::$db->select('id', "Arena", "retador = '$challenger' and defensor = '$defender'");
         return $data[0]['id'];
     }
     
@@ -81,12 +71,6 @@ class Arena implements IArena{
         self::getConnection();
         $data = self::$db->select('Action', "arenahistoria", "Arena_id = $this->id");
         return $data;
-    }
-    
-    public function loser($id) {
-        self::getConnection();
-        $values = ["visible" => 0];
-        $data = self::$db->update("character", $values, "id = " . $id);
     }
 
     public function getId(): int {
@@ -109,13 +93,6 @@ class Arena implements IArena{
         $this->defender = $defender;
     }
 
-    public function setWinner($Winner): void {
-        echo $Winner;
-        $this->winner = $Winner;
-        
-        
-    }
-
     public function getHistoria(): array {
         return $this->historia;
     }
@@ -129,8 +106,5 @@ class Arena implements IArena{
         $this->id = $id;
     }
 
-    public function getWinner(): int {
-        return $this->winner;
-    }
 
 }

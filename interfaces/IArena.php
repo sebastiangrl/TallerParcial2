@@ -24,10 +24,6 @@ interface IArena {
     
     function setDefender($defender): void;
     
-    function getWinner (): int;
-    
-    function setWinner ($winner): void;
-    
     function setHistoria (array $historia):void;
     
     function getHistoria ():array;

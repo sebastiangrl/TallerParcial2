@@ -32,23 +32,22 @@
         <?php $data = BlArena::searchFighters();
         foreach ($data as $defenders) : 
             $defenders = CharacterFactory::getCharacter(null,$defenders);?>
-          <form>
             <tr>             
                 <td value="<?php echo $defenders->getId() ?>"><?php echo $defenders->getName() ?></td>
                 <td><?php echo $defenders->getLevel() ?></td>
-                <td><?php echo Character::getClassName($defenders->getId()) ?></td>
+                <td><?php echo Character::getClassName($defenders->getId()); ?></td>
                 <td><?php echo $defenders->getUserName();?></td>
                 <td><button type="submit" class="btn btn-primary">Desafiar</button></td>             
             </tr>
-          </form>
         <?php endforeach; ?>
       </tbody>
     </table>
       <?php // para que funcione se deben recuperar los datos y agregarlos en la funcion de abajo createArena se debe ingresar un objeto  
             //  CharacterFactory::getCharacter($id) pide un id y te regresa el objeto que se debe agregar en ArenaFactory::createArena()
-        $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(2)->getId(), CharacterFactory::getCharacter(3)->getId());
-        $datos->setWinner($datos->fight(CharacterFactory::getCharacter(1), CharacterFactory::getCharacter(2)));
-        $datos->update($datos->getWinner())
+        $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(6)->getName(), CharacterFactory::getCharacter(7)->getName());
+        $pj = $datos->fight(CharacterFactory::getCharacter(6), CharacterFactory::getCharacter(7));
+        User::deleteUserChar($pj->getId());
+        $pj->delete();
                 ?>
       <label for="exampleInputEmail1">Batalla</label>
       <div class="batalla">
