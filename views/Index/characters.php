@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
                 <tr>             
                     <td value="<?php echo $character->getId() ?>">
                     <td><?php echo $character->getName() ?></td>
-                    <td><?php echo Character::getClassName($character->getId()) ?></td>
+                    <td><?php echo get_class($character); ?></td>
                     <td><?php echo $character->getLevel() ?></td>      
                 </tr>
             </form>

@@ -35,7 +35,7 @@
             <tr>             
                 <td value="<?php echo $defenders->getId() ?>"><?php echo $defenders->getName() ?></td>
                 <td><?php echo $defenders->getLevel() ?></td>
-                <td><?php echo Character::getClassName($defenders->getId()); ?></td>
+                <td><?php echo get_class($defenders); ?></td>
                 <td><?php echo $defenders->getUserName();?></td>
                 <td><button type="submit" class="btn btn-primary">Desafiar</button></td>             
             </tr>
