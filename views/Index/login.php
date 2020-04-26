@@ -1,7 +1,6 @@
-<?php $this->loadFragment("head");?>
+<?php $this->loadFragment("head"); ?>
 <body class="text-center">
     <form class="form-signin" method="post">
-        <!--<img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
         <h1 class="h3 mb-3 font-weight-normal">The best Rol game </br> Please Log In</h1>
 
         <label for="inputUSer" class="sr-only">User</label>
@@ -12,21 +11,29 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Log In</button>  
         <p class="mt-5 mb-3 text-muted">&copy; 2020-2020</p>
     </form>
-    
+
     <script>
-        
-        <?php
-        if (isset($_POST['submit'])) {
+        function go() {
+            document.location.assign('characters');
+        }
+    </script>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['user'] && !empty($_POST['password']))) {
 
             $value = \UserFactory::searchUser($_POST['user'], $_POST['password']);
-            
-            if ($value == true) {
-                //session_start();
-                ?>
-                  document.location.assign('characters'); <?php
+
+            if ($value->getName() == $_POST['user']) {
+                $_SESSION['user'] = $value;
+                ?> 
+                <script language="javascript">
+                    go();
+                </script> 
+                <?php
             }
         }
+    }
     ?>
-    </script>
 </body>
 </html>
