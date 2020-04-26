@@ -39,8 +39,10 @@ if (isset($_POST['submit'])) {
         <tbody>
             <?php
             $data = BlArena::searchMyFighters();
+            if(!empty($data)){
             foreach ($data as $character) :
                 $character = CharacterFactory::getCharacter(null, $character);
+           
                 ?>
             <form>
                 <tr>             
@@ -50,11 +52,11 @@ if (isset($_POST['submit'])) {
                     <td><?php echo $character->getLevel() ?></td>      
                 </tr>
             </form>
-        <?php endforeach; ?>
+            <?php endforeach; }?>
     </tbody>
 </table>
 <script>
-<?php if (isset($_POST['goArena'])) { ?>
+ <?php if (isset($_POST['goArena'])) { ?>
         document.location.assign('arena');
     <?php
 }?>
