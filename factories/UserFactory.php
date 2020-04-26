@@ -14,14 +14,18 @@ class UserFactory implements IUserFactory {
             $userName = $_POST['user'];
             $pass = $_POST['password'];
             $user = UserFactory::newUser($userName, $pass);
-            $user->create();
+            $user->createUser($userName,$pass);
         }
     }
 
-    public static function searchUser(string $username, string $password) {
-        $data = User::validUser($username, $password);
-       //$user = UserFactory::getUser($data[0]);
-        return $data;
+    public static function searchUser(string $username, string $password): \IUser {
+        $data = User::getModel($username, $password);
+        $user = UserFactory::getUser($data[0]);
+        return $user;
+    }
+
+    public static function getUser($objeto): \User {
+        return new User($objeto['id'], $objeto['username']);
     }
 
     public static function newUser(string $username, string $password): \User {

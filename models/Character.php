@@ -11,8 +11,6 @@
  *
  * @author pabhoz
  */
-require_once LVENDORS . 'MySQLiManager/MySQLiManager.php';
-
 abstract class Character implements ICharacter {
 
     protected $id;
@@ -38,60 +36,51 @@ abstract class Character implements ICharacter {
         $this->id = $id;
     }
 
-    private static function getConnection() {
-        self::$db = new MySQLiManager('localhost', 'root', '', 'mmorpg');
+    public function getUserName() {
+        $param = $this->id;
+        $data = singleton::select('username', "User", "id = (SELECT Userid from User_has_Character where Characterid = $param )");
+        return $data[0]['username'];
+        
     }
-
-    public function setUser() {
-        self::getConnection();
-        $values = ["Userid" => $_SESSION['user'], "Characterid" => $this->getId()];
-        $data = self::$db->insert("User_has_Character", $values);
+    
+    public function setUser(){
+        $values = ["Userid" => $_SESSION['user']->getID(), "Characterid" => $this->getId()];
+        $data = singleton::create("User_has_Character",$values);
     }
 
     public static function getModel(int $id) {
-        self::getConnection();
-        $data = self::$db->select('*', "Character", "visible = 1 and id in (select Characterid from user_has_character where userid = $idUser)");
+        $data = singleton::select('*', "Character", "id = $id");
         return $data[0];
     }
 
     public static function getClassName($id) {
-        self::getConnection();
-        $data = self::$db->select("name", "CharacterClass", "id = $id");
+        $data = singleton::select("name", "CharacterClass", "id = $id");
         return $data[0]["name"];
     }
 
     public static function getCharacterId($Name) {
-        self::getConnection();
-        $data = self::$db->select('id', "Character", "name = \"$Name\"");
+        $data = singleton::select('id',"Character", "name = \"$Name\"");
         return $data[0]["id"];
     }
-
+    
     public static function getClassNameId(string $className) {
-        self::getConnection();
-        $data = self::$db->select('id', "CharacterClass", "name = \"$className\"");
+        $data = singleton::select('id', "CharacterClass", "name = \"$className\"");
         return $data[0]["id"];
     }
 
     public function create() {
-        self::getConnection();
-        //print_r(get_object_vars($this));
         $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)), "visible" => 1];
-        $data = self::$db->insert("Character", $values);
+        $data = singleton::create("Character",$values);
     }
 
     public function update() {
-        self::getConnection();
-        //print_r(get_object_vars($this));
         $values = ["level" => $this->getLevel()];
-        $data = self::$db->update("Character", $values, "id = " . $this->getId());
+        $data = singleton::update("Character", $values, "id = " . $this->getId());
     }
 
     public function delete() {
-        self::getConnection();
-        //print_r(get_object_vars($this));
-        //$values = ["id" => $this->getId()];
-        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)), "id" => $this->getId()];
-        $data = self::$db->delete("Character", $values);
+        $values = ["name" => $this->getName(), "level" => $this->getLevel(), "characterClassId" => self::getClassNameId(get_class($this)),"id" => $this->getId()];
+        $data = singleton::delete("Character", $values);
     }
 
     abstract public function attack(\ICharacter $target): string;

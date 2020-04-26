@@ -1,16 +1,21 @@
 <?php
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author PELITOS
  */
 interface IUser {
     
-    public function getId(): int;
+    public function getId():int;
     
-    static function getUser(int $id);
-
-    static function validUser(string $username, string $password);
+    public function getName():string;
     
-    function create();
+    public function setPassword():void;
+    
 }

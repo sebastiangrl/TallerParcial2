@@ -2,7 +2,6 @@
 if (isset($_POST['submit'])) {
     \CharacterFactory::createCharacter();
 }
-
 //$character = CharacterFactory::getCharacter(2);
 //$character->delete();
 ?>
@@ -14,8 +13,8 @@ if (isset($_POST['submit'])) {
         <h1>Characters</h1>
 
         <fieldset>
-            <label>Name: </label><input name="name" type="text" value="" required></br>
-            <label>Class: </label><select name="selectClass" required>
+            <label>Name: </label><input name="name" type="text" value=""></br>
+            <label>Class: </label><select name="selectClass">
                 <option value="" disabled selected>-- Select --</option>
                 <option value="Mage">Mage</option> 
                 <option value="Rogue">Rogue</option>
@@ -24,6 +23,7 @@ if (isset($_POST['submit'])) {
         </fieldset>
 
         <button type="submit" class="btn btn-lg btn-primary btn-block" name="submit">Create</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" name="goArena">Go Arena</button>
     </form>
 
     <table class="table table-striped" id="characterTable">
@@ -44,16 +44,21 @@ if (isset($_POST['submit'])) {
                 ?>
             <form>
                 <tr>             
-                    <td value="<?php echo $character->getId()  ?>">
+                    <td value="<?php echo $character->getId() ?>">
                     <td><?php echo $character->getName() ?></td>
-                    <td><?php echo Character::getClassName($character->getId())  ?></td>
-                    <td><?php echo $character->getLevel()  ?></td>      
+                    <td><?php echo Character::getClassName($character->getId()) ?></td>
+                    <td><?php echo $character->getLevel() ?></td>      
                 </tr>
             </form>
-<?php endforeach; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
-
+<script>
+<?php if (isset($_POST['goArena'])) { ?>
+        document.location.assign('arena');
+    <?php
+}?>
+</script>
 
 </body>
 </html>

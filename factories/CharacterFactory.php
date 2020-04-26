@@ -14,7 +14,6 @@
 class CharacterFactory implements ICharacterFactory {
 
     public static function getCharacter(int $id = null, $data = null): \ICharacter {
-
         if(!is_null($id)){
             $data = Character::getModel($id);
         }
@@ -39,18 +38,18 @@ class CharacterFactory implements ICharacterFactory {
         return new Warrior($name);
     }
 
+    
     public static function createCharacter() {
 
         if (isset($_POST['name']) && isset($_POST['selectClass'])) {
             $name = $_POST['name'];
             $selectClass = $_POST['selectClass'];
-
+            
             $className = "new" . ucfirst($selectClass);
             $character = CharacterFactory::{$className}($name);
-            $character->create();
-            $character->setId(Character::getCharacterId($character->getName()));
+            $character->create();   
+            $character->setID(Character::getCharacterId($character->getName()));
             $character->setUser();
         }
     }
-
 }

@@ -19,6 +19,8 @@
     
     define('BUSINESSLOGIC','./businessLogic/');
     
+    define('SINGLETON','./singleton/');
+
     define('LVENDORS','./vendors/');
     
     define('VENDORS','./views/_vendors/');

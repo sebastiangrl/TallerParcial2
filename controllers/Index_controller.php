@@ -11,32 +11,32 @@
  *
  * @author pabhoz
  */
-class Index_controller extends Controller {
-
+class Index_controller extends Controller{
+    
     function __construct() {
         parent::__construct();
     }
 
     public function index(): void {
-        $this->view->render($this, "index", "Woooooah MVC");
+        $this->view->render($this,"index","Woooooah MVC");
     }
-
+    
     public function login(): void {
         $this->view->render($this, "login", "Login");
     }
-
-    public function arena(): void {
-        if (!isset($_SESSION['user'])) {
+    
+    public function arena(): void{
+        if(!isset($_SESSION['user'])) {            
             header('Location:' . URL);
         }
-        $this->view->render($this, "arena", "Arena");
+        $this->view->render($this,"arena","Arena");
     }
-
-    public function characters(): void {
-        if (!isset($_SESSION['user'])) {
+    
+    public function characters(): void{
+        /*if(!isset($_SESSION['user'])) {            
             header('Location:' . URL);
-        }
-        $this->view->render($this, "characters", "Characters");
+        }*/
+        $this->view->render($this,"characters","Characters");
     }
 
 }

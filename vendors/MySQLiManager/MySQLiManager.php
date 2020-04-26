@@ -202,7 +202,8 @@ class MySQLiManager{
 				$where = $key.'="'.$value.'"';
 			}
 		}
-		$stmt = "SELECT $what FROM `$table` WHERE $where";
+
+		$stmt = "SELECT ".$what." FROM ".$table." WHERE ".$where;
 		$result = $this->link->query($stmt) or die($this->link->error.__LINE__);
 		if($result->num_rows > 0) {
 			$response = true;
