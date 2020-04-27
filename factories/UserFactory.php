@@ -31,10 +31,4 @@ class UserFactory implements IUserFactory {
     public static function newUser(string $username, string $password): \User {
         return new User($username, $password, null);
     }
-
-    public static function getUserInFactory(int $id): \IUser {
-        $user = User::getUser($id);
-        return $user;
-    }
-
 }

@@ -28,18 +28,20 @@ class Arena implements IArena {
     public function fight(\ICharacter $challenger, \ICharacter $defenders): \ICharacter {
         $this->createAction("~ " . $defenders->attack($challenger));
         if ($challenger->iDie()) {
+            $defenders->levelUp();
             return $challenger;
         }
         $this->createAction("~ " . $challenger->attack($defenders));
         if ($defenders->iDie()) {
-            return $challenger;
+            $challenger->levelUp();
+            return $defenders;
         }
         return self::fight($challenger, $defenders);
     }
 
     public function createAction($action) {
         $values = ["Action" => $action, "Arena_id" => $this->getId()];
-        $data = singleton::create("arenahistoria", $values);
+        $data = singleton::create("ArenaHistoria", $values);
     }
 
     public function createArena($challenger, $defender) {
@@ -47,11 +49,11 @@ class Arena implements IArena {
         $data = singleton::create("Arena", $values);
     }
 
-    public function getModel() {
+    /*public function getModel() {
         $id = $_SESSION['user']->getId();
-        $data = singleton::select('*', "Arena", "(Ccharacterid or Dcharacterid) in (select Characterid from user_has_character where userid = $id)");
+        $data = singleton::select('*', "Arena", "(Ccharacterid or Dcharacterid) in (select Characterid from User_has_Character where userid = $id)");
         return $data[0];
-    }
+    }*/
 
     public function getArenaId($challenger, $defender) {
         $data = singleton::select('id', "Arena", "retador = '$challenger' and defensor = '$defender'");
@@ -59,7 +61,7 @@ class Arena implements IArena {
     }
 
     public function getModeloHistoria() {
-        $data = singleton::select('Action', "arenahistoria", "Arena_id = $this->id");
+        $data = singleton::select('Action', "ArenaHistoria", "Arena_id = $this->id");
         return $data;
     }
 

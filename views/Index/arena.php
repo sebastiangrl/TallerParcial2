@@ -36,7 +36,7 @@
                 <td value="<?php echo $defenders->getId() ?>"><?php echo $defenders->getName() ?></td>
                 <td><?php echo $defenders->getLevel() ?></td>
                 <td><?php echo get_class($defenders); ?></td>
-                <td><?php echo $defenders->getUserName();?></td>
+                <td><?php echo $defenders->getUserName(); ?></td>
                 <td><button type="submit" class="btn btn-primary">Desafiar</button></td>             
             </tr>
         <?php endforeach; ?>
@@ -44,8 +44,10 @@
     </table>
       <?php // para que funcione se deben recuperar los datos y agregarlos en la funcion de abajo createArena se debe ingresar un objeto  
             //  CharacterFactory::getCharacter($id) pide un id y te regresa el objeto que se debe agregar en ArenaFactory::createArena()
-        $datos = ArenaFactory::createArena(CharacterFactory::getCharacter(1)->getName(), CharacterFactory::getCharacter(11)->getName());
-        $pj = $datos->fight(CharacterFactory::getCharacter(1), CharacterFactory::getCharacter(11));
+        $retador = CharacterFactory::getCharacter(10);
+        $defensor = CharacterFactory::getCharacter(13);
+        $datos = ArenaFactory::createArena($retador->getName(), $defensor->getName());
+        $pj = $datos->fight($retador,$defensor);
         User::deleteUserChar($pj->getId());
         $pj->delete();
                 ?>

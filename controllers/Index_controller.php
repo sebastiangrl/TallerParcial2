@@ -16,7 +16,7 @@ class Index_controller extends Controller{
     function __construct() {
         parent::__construct();
     }
-
+    
     public function index(): void {
         $this->view->render($this,"index","Woooooah MVC");
     }
@@ -33,10 +33,10 @@ class Index_controller extends Controller{
     }
     
     public function characters(): void{
-        /*if(!isset($_SESSION['user'])) {            
+        if(!isset($_SESSION['user'])) {            
             header('Location:' . URL);
-        }*/
+        }
         $this->view->render($this,"characters","Characters");
     }
-
+    
 }

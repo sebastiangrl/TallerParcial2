@@ -12,11 +12,6 @@ class singleton {
         }
     }
 
-    public function getRelationship($t) {
-        self::getConnection();
-        return self::$db->getRelationship($t);
-    }
-
     public static function select($values, $table, $where) {
         self::getConnection();
         $results = self::$db->select($values, $table, $where);
@@ -40,5 +35,10 @@ class singleton {
         $results = self::$db->delete($table, $values, $complex);
         return $results;
     }
-
+    
+    public function __clone() {
+        trigger_error("La clonación de este objeto no esta permitida");
+    }
+    
+    
 }

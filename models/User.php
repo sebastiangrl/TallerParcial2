@@ -41,7 +41,7 @@ class User implements IUser {
 
     public static function deleteUserChar($param) {
         $values = ["Characterid" => $param];
-        $data = singleton::delete("user_has_character", "Characterid = $param", true);
+        $data = singleton::delete("User_has_Character", "Characterid = $param", true);
     }
 
     public function getId(): int {

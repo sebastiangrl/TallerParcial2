@@ -38,9 +38,8 @@ abstract class Character implements ICharacter {
 
     public function getUserName() {
         $param = $this->id;
-        $data = singleton::select('username', "User", "id = (SELECT Userid from User_has_Character where Characterid = $param )");
-        return $data[0]['username'];
-        
+        $data = singleton::select('username', "User", "id in (SELECT Userid from User_has_Character where Characterid = $param )");
+        return $data[0]['username'];      
     }
     
     public function setUser(){
@@ -88,6 +87,11 @@ abstract class Character implements ICharacter {
     abstract public function getDamage(float $value, bool $isMagical): string;
 
     abstract public function getStat(string $statName): float;
+    
+    public function levelUp(){
+        $this->setLevel($this->getLevel()+1);
+        $this->update();
+    }
 
     public function getStats(): array {
         return ["level" => $this->getLevel(), "str" => $this->getStr(), "intl" => $this->getIntl(), "agi" => $this->getAgi()
